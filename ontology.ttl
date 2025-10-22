@@ -1,0 +1,267 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix pantry: <https://pantry.app/ns#> .
+
+# Ontology Metadata
+<https://pantry.app/ns#> a owl:Ontology ;
+    rdfs:label "Pantry Ontology"@en ;
+    rdfs:comment "Een ontologie voor slimme voorraadbeheer met semantische koppeling aan recepten, dieet en prijsdata."@nl ;
+    owl:versionInfo "1.0.0" .
+
+# ============================================
+# CORE CLASSES
+# ============================================
+
+pantry:Product a owl:Class ;
+    rdfs:label "Product"@en ;
+    rdfs:comment "Een voedselproduct in de voorraad"@nl ;
+    rdfs:subClassOf schema:Product .
+
+pantry:StorageLocation a owl:Class ;
+    rdfs:label "Opslaglocatie"@nl ;
+    rdfs:comment "Locatie waar een product wordt bewaard (koelkast, vriezer, kast, etc.)"@nl .
+
+pantry:Purchase a owl:Class ;
+    rdfs:label "Aankoop"@nl ;
+    rdfs:comment "Een specifieke aankoop van een product met prijs, datum en winkel"@nl .
+
+pantry:UserProfile a owl:Class ;
+    rdfs:label "Gebruikersprofiel"@nl ;
+    rdfs:comment "Profiel met dieetvoorkeuren en allergieën van de gebruiker"@nl ;
+    rdfs:subClassOf schema:Person .
+
+# Reuse schema.org classes
+schema:Recipe a owl:Class ;
+    rdfs:label "Recept"@nl .
+
+schema:Store a owl:Class ;
+    rdfs:label "Winkel"@nl .
+
+schema:NutritionInformation a owl:Class ;
+    rdfs:label "Voedingsinformatie"@nl .
+
+# ============================================
+# STORAGE LOCATION INDIVIDUALS
+# ============================================
+
+pantry:Fridge a pantry:StorageLocation ;
+    rdfs:label "Koelkast"@nl ;
+    pantry:storageTemperature "2-7°C" .
+
+pantry:Freezer a pantry:StorageLocation ;
+    rdfs:label "Vriezer"@nl ;
+    pantry:storageTemperature "-18°C" .
+
+pantry:Pantry a pantry:StorageLocation ;
+    rdfs:label "Voorraadkast"@nl ;
+    pantry:storageTemperature "kamertemperatuur" .
+
+pantry:Countertop a pantry:StorageLocation ;
+    rdfs:label "Aanrecht"@nl ;
+    pantry:storageTemperature "kamertemperatuur" .
+
+# ============================================
+# PROPERTIES - Product Management
+# ============================================
+
+pantry:storedIn a owl:ObjectProperty ;
+    rdfs:label "opgeslagen in"@nl ;
+    rdfs:domain pantry:Product ;
+    rdfs:range pantry:StorageLocation .
+
+pantry:quantity a owl:DatatypeProperty ;
+    rdfs:label "hoeveelheid"@nl ;
+    rdfs:domain pantry:Product ;
+    rdfs:range xsd:decimal .
+
+pantry:unit a owl:DatatypeProperty ;
+    rdfs:label "eenheid"@nl ;
+    rdfs:domain pantry:Product ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Eenheid zoals 'stuks', 'gram', 'liter', etc."@nl .
+
+pantry:barcode a owl:DatatypeProperty ;
+    rdfs:label "barcode"@nl ;
+    rdfs:domain pantry:Product ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf schema:gtin .
+
+pantry:category a owl:DatatypeProperty ;
+    rdfs:label "categorie"@nl ;
+    rdfs:domain pantry:Product ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Productcategorie zoals 'zuivel', 'vlees', 'groente', etc."@nl .
+
+# Reuse schema.org properties
+schema:name a owl:DatatypeProperty ;
+    rdfs:label "naam"@nl ;
+    rdfs:range xsd:string .
+
+schema:brand a owl:ObjectProperty ;
+    rdfs:label "merk"@nl .
+
+schema:expirationDate a owl:DatatypeProperty ;
+    rdfs:label "houdbaarheidsdatum"@nl ;
+    rdfs:range xsd:date .
+
+# ============================================
+# PROPERTIES - Purchase & Pricing
+# ============================================
+
+pantry:hasPurchase a owl:ObjectProperty ;
+    rdfs:label "heeft aankoop"@nl ;
+    rdfs:domain pantry:Product ;
+    rdfs:range pantry:Purchase .
+
+pantry:purchaseDate a owl:DatatypeProperty ;
+    rdfs:label "aankoopdatum"@nl ;
+    rdfs:domain pantry:Purchase ;
+    rdfs:range xsd:date .
+
+pantry:purchasedAt a owl:ObjectProperty ;
+    rdfs:label "gekocht bij"@nl ;
+    rdfs:domain pantry:Purchase ;
+    rdfs:range schema:Store .
+
+schema:price a owl:DatatypeProperty ;
+    rdfs:label "prijs"@nl ;
+    rdfs:range xsd:decimal .
+
+schema:priceCurrency a owl:DatatypeProperty ;
+    rdfs:label "valuta"@nl ;
+    rdfs:range xsd:string .
+
+# ============================================
+# PROPERTIES - Recipes
+# ============================================
+
+schema:recipeIngredient a owl:DatatypeProperty ;
+    rdfs:label "recept ingrediënt"@nl ;
+    rdfs:domain schema:Recipe ;
+    rdfs:range xsd:string .
+
+pantry:requiresProduct a owl:ObjectProperty ;
+    rdfs:label "vereist product"@nl ;
+    rdfs:domain schema:Recipe ;
+    rdfs:range pantry:Product ;
+    rdfs:comment "Koppeling tussen recept en specifiek product type"@nl .
+
+schema:recipeInstructions a owl:DatatypeProperty ;
+    rdfs:label "bereidingswijze"@nl ;
+    rdfs:domain schema:Recipe .
+
+schema:recipeYield a owl:DatatypeProperty ;
+    rdfs:label "aantal porties"@nl ;
+    rdfs:domain schema:Recipe .
+
+schema:cookTime a owl:DatatypeProperty ;
+    rdfs:label "bereidingstijd"@nl ;
+    rdfs:domain schema:Recipe ;
+    rdfs:range xsd:duration .
+
+schema:prepTime a owl:DatatypeProperty ;
+    rdfs:label "voorbereidingstijd"@nl ;
+    rdfs:domain schema:Recipe ;
+    rdfs:range xsd:duration .
+
+# ============================================
+# PROPERTIES - Nutrition & Diet
+# ============================================
+
+schema:nutrition a owl:ObjectProperty ;
+    rdfs:label "voedingswaarde"@nl ;
+    rdfs:range schema:NutritionInformation .
+
+pantry:allergen a owl:DatatypeProperty ;
+    rdfs:label "allergeen"@nl ;
+    rdfs:domain pantry:Product ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Allergenen zoals 'melk', 'gluten', 'noten', etc."@nl .
+
+schema:suitableForDiet a owl:ObjectProperty ;
+    rdfs:label "geschikt voor dieet"@nl ;
+    rdfs:comment "Dieettype zoals Vegetarisch, Veganistisch, GlutenVrij, etc."@nl .
+
+# Diet Type Individuals
+schema:VegetarianDiet a owl:NamedIndividual ;
+    rdfs:label "Vegetarisch"@nl .
+
+schema:VeganDiet a owl:NamedIndividual ;
+    rdfs:label "Veganistisch"@nl .
+
+schema:GlutenFreeDiet a owl:NamedIndividual ;
+    rdfs:label "Glutenvrij"@nl .
+
+schema:LowLactoseDiet a owl:NamedIndividual ;
+    rdfs:label "Lactosearm"@nl .
+
+schema:KetogenicDiet a owl:NamedIndividual ;
+    rdfs:label "Ketogeen"@nl .
+
+# ============================================
+# PROPERTIES - User Profile
+# ============================================
+
+pantry:hasAllergy a owl:DatatypeProperty ;
+    rdfs:label "heeft allergie"@nl ;
+    rdfs:domain pantry:UserProfile ;
+    rdfs:range xsd:string .
+
+pantry:followsDiet a owl:ObjectProperty ;
+    rdfs:label "volgt dieet"@nl ;
+    rdfs:domain pantry:UserProfile ;
+    rdfs:range schema:Diet .
+
+pantry:expirationWarningDays a owl:DatatypeProperty ;
+    rdfs:label "waarschuwing dagen voor vervaldatum"@nl ;
+    rdfs:domain pantry:UserProfile ;
+    rdfs:range xsd:integer ;
+    rdfs:comment "Aantal dagen voor vervaldatum waarop waarschuwing gegeven wordt"@nl .
+
+# ============================================
+# EXAMPLE QUERIES (as comments)
+# ============================================
+
+# Query 1: Welke producten vervallen binnen 3 dagen?
+# SELECT ?product ?name ?expiryDate WHERE {
+#   ?product a pantry:Product ;
+#            schema:name ?name ;
+#            schema:expirationDate ?expiryDate .
+#   FILTER(?expiryDate <= "2025-10-25"^^xsd:date)
+# }
+
+# Query 2: Wat kan ik eten met wat ik in huis heb?
+# SELECT ?recipe ?recipeName WHERE {
+#   ?recipe a schema:Recipe ;
+#           schema:name ?recipeName ;
+#           pantry:requiresProduct ?ingredient .
+#   ?inventoryItem a pantry:Product ;
+#                  pantry:matchesIngredient ?ingredient .
+# }
+
+# Query 3: Welke recepten bevatten geen allergenen waarvoor ik gevoelig ben?
+# SELECT ?recipe WHERE {
+#   ?recipe a schema:Recipe .
+#   ?user pantry:hasAllergy ?allergen .
+#   FILTER NOT EXISTS {
+#     ?recipe pantry:requiresProduct ?product .
+#     ?product pantry:allergen ?allergen .
+#   }
+# }
+
+# Query 4: Waar heb ik het goedkoopst melk gekocht?
+# SELECT ?store ?price WHERE {
+#   ?product schema:name "Melk" ;
+#            pantry:hasPurchase ?purchase .
+#   ?purchase schema:price ?price ;
+#             pantry:purchasedAt ?store .
+# } ORDER BY ASC(?price) LIMIT 1
+
+# Query 5: Welke ingrediënten komen in meerdere producten voor?
+# SELECT ?ingredient (COUNT(?product) as ?count) WHERE {
+#   ?product a pantry:Product ;
+#            pantry:containsIngredient ?ingredient .
+# } GROUP BY ?ingredient HAVING (COUNT(?product) > 1)
