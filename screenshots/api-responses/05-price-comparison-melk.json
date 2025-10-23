@@ -1,0 +1,13 @@
+{
+  "productName": "Melk",
+  "purchases": [
+    {
+      "store": "Albert Heijn",
+      "price": 1.29,
+      "date": "2025-10-15"
+    }
+  ],
+  "lowestPrice": 1.29,
+  "latestPrice": 1.29,
+  "averagePrice": 1.29
+}

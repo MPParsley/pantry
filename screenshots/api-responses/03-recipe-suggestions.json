@@ -1,0 +1,38 @@
+[
+  {
+    "recipe": {
+      "@context": "https://schema.org",
+      "@type": "Recipe",
+      "@id": "https://pantry.app/recipes/r001",
+      "name": "Tosti met Kaas en Tomaat",
+      "description": "Klassieke Nederlandse tosti met kaas en verse tomaat",
+      "recipeIngredient": [
+        "brood",
+        "kaas",
+        "tomaten",
+        "boter"
+      ],
+      "recipeInstructions": "1. Verwarm de tosti-ijzer of pan. 2. Besmeer het brood met boter. 3. Beleg met kaas en plakjes tomaat. 4. Grill tot het brood knapperig is en de kaas gesmolten. 5. Serveer warm.",
+      "recipeYield": "1 portie",
+      "prepTime": "PT5M",
+      "cookTime": "PT5M",
+      "allergens": [
+        "gluten",
+        "melk"
+      ],
+      "suitableForDiet": [
+        "VegetarianDiet"
+      ]
+    },
+    "availableIngredients": [
+      "brood",
+      "kaas",
+      "tomaten"
+    ],
+    "missingIngredients": [
+      "boter"
+    ],
+    "matchPercentage": 75,
+    "priorityScore": 175
+  }
+]

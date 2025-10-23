@@ -1,0 +1,24 @@
+{
+  "available": true,
+  "products": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": "https://pantry.app/products/p001",
+      "name": "Melk",
+      "brand": "Campina",
+      "category": "dairy",
+      "quantity": 1,
+      "unit": "liter",
+      "expirationDate": "2025-10-24",
+      "storedIn": "Fridge",
+      "barcode": "8710400043287",
+      "allergens": [
+        "melk",
+        "lactose"
+      ],
+      "suitableForDiet": [],
+      "addedAt": "2025-10-15T10:30:00Z"
+    }
+  ]
+}

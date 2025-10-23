@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantry MVP - Demo Screenshots</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; }
+        .tab-active { border-bottom: 2px solid #16a34a; color: #16a34a; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-green-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <h1 class="text-3xl font-bold">🍎 Pantry</h1>
+            <p class="text-green-100">Slimme voorraadassistent</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex space-x-4" id="tabs">
+                <button onclick="showTab('inventory')" id="tab-inventory" class="py-4 px-6 font-medium border-b-2 transition-colors tab-active">
+                    Voorraad (5)
+                </button>
+                <button onclick="showTab('warnings')" id="tab-warnings" class="py-4 px-6 font-medium border-b-2 border-transparent text-gray-600 hover:text-green-600">
+                    Waarschuwingen (4)
+                </button>
+                <button onclick="showTab('recipes')" id="tab-recipes" class="py-4 px-6 font-medium border-b-2 border-transparent text-gray-600 hover:text-green-600">
+                    Wat eten we? (1)
+                </button>
+                <button onclick="showTab('add')" id="tab-add" class="py-4 px-6 font-medium border-b-2 border-transparent text-gray-600 hover:text-green-600">
+                    + Toevoegen
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Inventory Tab -->
+        <div id="content-inventory" class="tab-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Voorraad overzicht</h2>
+                <button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                    Vernieuwen
+                </button>
+            </div>
+
+            <!-- Koelkast -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold mb-4 text-gray-700">Koelkast (4)</h3>
+                <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <!-- Melk - RED -->
+                    <div class="p-4 rounded-lg border-2 bg-red-100 border-red-300">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="font-bold text-lg">Melk</h4>
+                                <p class="text-sm text-gray-600">Campina</p>
+                            </div>
+                            <button class="text-red-600 hover:text-red-800 text-xl">×</button>
+                        </div>
+                        <div class="space-y-1 text-sm">
+                            <p>Hoeveelheid: <span class="font-medium">1 liter</span></p>
+                            <p>Vervalt: <span class="font-medium text-red-600">2025-10-24 (1 dagen)</span></p>
+                            <p class="text-orange-600">Allergenen: melk, lactose</p>
+                        </div>
+                    </div>
+
+                    <!-- Eieren -->
+                    <div class="p-4 rounded-lg border-2 bg-white border-gray-200">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="font-bold text-lg">Eieren</h4>
+                                <p class="text-sm text-gray-600">Rondeel</p>
+                            </div>
+                            <button class="text-red-600 hover:text-red-800 text-xl">×</button>
+                        </div>
+                        <div class="space-y-1 text-sm">
+                            <p>Hoeveelheid: <span class="font-medium">6 stuks</span></p>
+                            <p>Vervalt: <span class="font-medium text-gray-700">2025-10-30 (7 dagen)</span></p>
+                            <p class="text-orange-600">Allergenen: ei</p>
+                        </div>
+                    </div>
+
+                    <!-- Tomaten -->
+                    <div class="p-4 rounded-lg border-2 bg-white border-gray-200">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="font-bold text-lg">Tomaten</h4>
+                            </div>
+                            <button class="text-red-600 hover:text-red-800 text-xl">×</button>
+                        </div>
+                        <div class="space-y-1 text-sm">
+                            <p>Hoeveelheid: <span class="font-medium">500 gram</span></p>
+                            <p>Vervalt: <span class="font-medium text-gray-700">2025-10-27 (4 dagen)</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Kaas -->
+                    <div class="p-4 rounded-lg border-2 bg-white border-gray-200">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="font-bold text-lg">Kaas</h4>
+                                <p class="text-sm text-gray-600">Beemster</p>
+                            </div>
+                            <button class="text-red-600 hover:text-red-800 text-xl">×</button>
+                        </div>
+                        <div class="space-y-1 text-sm">
+                            <p>Hoeveelheid: <span class="font-medium">200 gram</span></p>
+                            <p>Vervalt: <span class="font-medium text-gray-700">2025-11-10 (18 dagen)</span></p>
+                            <p class="text-orange-600">Allergenen: melk, lactose</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aanrecht -->
+            <div>
+                <h3 class="text-xl font-semibold mb-4 text-gray-700">Aanrecht (1)</h3>
+                <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <!-- Brood - RED -->
+                    <div class="p-4 rounded-lg border-2 bg-red-100 border-red-300">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="font-bold text-lg">Brood</h4>
+                                <p class="text-sm text-gray-600">Bakker Bart</p>
+                            </div>
+                            <button class="text-red-600 hover:text-red-800 text-xl">×</button>
+                        </div>
+                        <div class="space-y-1 text-sm">
+                            <p>Hoeveelheid: <span class="font-medium">1 stuks</span></p>
+                            <p>Vervalt: <span class="font-medium text-red-600">2025-10-23 (0 dagen)</span></p>
+                            <p class="text-orange-600">Allergenen: gluten</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Warnings Tab -->
+        <div id="content-warnings" class="tab-content hidden">
+            <h2 class="text-2xl font-bold mb-6">Vervaldatum waarschuwingen</h2>
+
+            <div class="space-y-4">
+                <!-- Brood - RED -->
+                <div class="p-4 rounded-lg border-l-4 bg-red-100 border-red-500">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-2xl">🔴</span>
+                                <h3 class="text-lg font-bold text-red-800">Brood</h3>
+                                <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800 border border-red-500">
+                                    Dringend
+                                </span>
+                            </div>
+                            <div class="ml-10 space-y-1 text-sm">
+                                <p class="text-gray-600">Merk: Bakker Bart</p>
+                                <p class="text-gray-700">Vervaldatum: <span class="font-medium">2025-10-23</span></p>
+                                <p class="font-bold text-red-800">Vervalt VANDAAG!</p>
+                                <p class="text-gray-600">Locatie: Countertop • 1 stuks</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Melk - RED -->
+                <div class="p-4 rounded-lg border-l-4 bg-red-100 border-red-500">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-2xl">🔴</span>
+                                <h3 class="text-lg font-bold text-red-800">Melk</h3>
+                                <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800 border border-red-500">
+                                    Dringend
+                                </span>
+                            </div>
+                            <div class="ml-10 space-y-1 text-sm">
+                                <p class="text-gray-600">Merk: Campina</p>
+                                <p class="text-gray-700">Vervaldatum: <span class="font-medium">2025-10-24</span></p>
+                                <p class="font-bold text-red-800">Vervalt MORGEN!</p>
+                                <p class="text-gray-600">Locatie: Fridge • 1 liter</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tomaten - ORANGE -->
+                <div class="p-4 rounded-lg border-l-4 bg-orange-100 border-orange-500">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-2xl">🟠</span>
+                                <h3 class="text-lg font-bold text-orange-800">Tomaten</h3>
+                                <span class="px-2 py-1 text-xs rounded-full bg-orange-100 text-orange-800 border border-orange-500">
+                                    Binnenkort
+                                </span>
+                            </div>
+                            <div class="ml-10 space-y-1 text-sm">
+                                <p class="text-gray-700">Vervaldatum: <span class="font-medium">2025-10-27</span></p>
+                                <p class="font-bold text-orange-800">Nog 4 dagen</p>
+                                <p class="text-gray-600">Locatie: Fridge • 500 gram</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Eieren - YELLOW -->
+                <div class="p-4 rounded-lg border-l-4 bg-yellow-100 border-yellow-500">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-2xl">🟡</span>
+                                <h3 class="text-lg font-bold text-yellow-800">Eieren</h3>
+                                <span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800 border border-yellow-500">
+                                    Let op
+                                </span>
+                            </div>
+                            <div class="ml-10 space-y-1 text-sm">
+                                <p class="text-gray-600">Merk: Rondeel</p>
+                                <p class="text-gray-700">Vervaldatum: <span class="font-medium">2025-10-30</span></p>
+                                <p class="font-bold text-yellow-800">Nog 7 dagen</p>
+                                <p class="text-gray-600">Locatie: Fridge • 6 stuks</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <h3 class="font-bold text-blue-900 mb-2">💡 Tip</h3>
+                <p class="text-blue-800">
+                    Kijk bij "Wat eten we?" voor recepten die deze ingrediënten gebruiken!
+                </p>
+            </div>
+        </div>
+
+        <!-- Recipes Tab -->
+        <div id="content-recipes" class="tab-content hidden">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold">Wat eten we?</h2>
+                <p class="text-gray-600 mt-2">
+                    Recepten op basis van wat je in huis hebt. Producten die binnenkort vervallen krijgen voorrang.
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Tosti -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Tosti met Kaas en Tomaat</h3>
+                                <p class="text-gray-600">Klassieke Nederlandse tosti met kaas en verse tomaat</p>
+                            </div>
+                            <div class="ml-4 text-center">
+                                <div class="text-2xl font-bold text-green-600">75%</div>
+                                <div class="text-xs text-gray-500">Match</div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 text-sm text-gray-600 mb-4">
+                            <span>👥 1 portie</span>
+                            <span>⏱️ Prep: PT5M</span>
+                            <span>🔥 Cook: PT5M</span>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <h4 class="font-semibold text-green-700 mb-2">✅ Beschikbaar (3)</h4>
+                                <ul class="space-y-1">
+                                    <li class="text-sm text-gray-700">• brood</li>
+                                    <li class="text-sm text-gray-700">• kaas</li>
+                                    <li class="text-sm text-gray-700">• tomaten</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-orange-700 mb-2">❌ Ontbreekt (1)</h4>
+                                <ul class="space-y-1">
+                                    <li class="text-sm text-gray-700">• boter</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <details class="mt-4">
+                            <summary class="cursor-pointer font-semibold text-gray-700 hover:text-green-600">
+                                Bereidingswijze
+                            </summary>
+                            <p class="mt-2 text-sm text-gray-600 whitespace-pre-line">
+1. Verwarm de tosti-ijzer of pan.
+2. Besmeer het brood met boter.
+3. Beleg met kaas en plakjes tomaat.
+4. Grill tot het brood knapperig is en de kaas gesmolten.
+5. Serveer warm.
+                            </p>
+                        </details>
+
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">VegetarianDiet</span>
+                            <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">⚠️ gluten</span>
+                            <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">⚠️ melk</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Product Tab -->
+        <div id="content-add" class="tab-content hidden max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-6">Product toevoegen</h2>
+
+            <form class="bg-white rounded-lg shadow-md p-6 space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Productnaam *</label>
+                    <input type="text" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500" placeholder="bijv. Melk">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Merk</label>
+                    <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500" placeholder="bijv. Campina">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Categorie *</label>
+                        <select required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500">
+                            <option>Zuivel</option>
+                            <option>Vlees</option>
+                            <option>Vis</option>
+                            <option>Groente</option>
+                            <option>Fruit</option>
+                            <option>Brood & Bakkerij</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Locatie *</label>
+                        <select required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500">
+                            <option>Koelkast</option>
+                            <option>Vriezer</option>
+                            <option>Voorraadkast</option>
+                            <option>Aanrecht</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Hoeveelheid *</label>
+                        <input type="number" required min="0.01" step="0.01" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Eenheid *</label>
+                        <input type="text" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500" placeholder="stuks, liter, gram">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Houdbaarheidsdatum *</label>
+                    <input type="date" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Barcode</label>
+                    <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500" placeholder="bijv. 8710400043287">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Allergenen (komma gescheiden)</label>
+                    <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500" placeholder="bijv. melk, lactose">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Geschikt voor dieet</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2">
+                            <span class="text-sm text-gray-700">Vegetarisch</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2">
+                            <span class="text-sm text-gray-700">Veganistisch</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2">
+                            <span class="text-sm text-gray-700">Glutenvrij</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2">
+                            <span class="text-sm text-gray-700">Lactosearm</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-green-600 text-white py-3 px-4 rounded-md hover:bg-green-700 font-medium">
+                    Product toevoegen
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t mt-12">
+        <div class="container mx-auto px-4 py-6 text-center text-gray-600">
+            <p>Pantry MVP - Linked Data voorraadbeheer met schema.org</p>
+        </div>
+    </footer>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+
+            // Remove active class from all tab buttons
+            document.querySelectorAll('button[id^="tab-"]').forEach(btn => {
+                btn.classList.remove('tab-active', 'text-green-600', 'border-green-600');
+                btn.classList.add('border-transparent', 'text-gray-600');
+            });
+
+            // Show selected tab
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+
+            // Add active class to clicked button
+            const activeBtn = document.getElementById('tab-' + tabName);
+            activeBtn.classList.add('tab-active', 'text-green-600', 'border-green-600');
+            activeBtn.classList.remove('border-transparent', 'text-gray-600');
+        }
+    </script>
+</body>
+</html>

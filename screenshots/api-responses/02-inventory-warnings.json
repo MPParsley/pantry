@@ -1,0 +1,94 @@
+[
+  {
+    "product": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": "https://pantry.app/products/p003",
+      "name": "Brood",
+      "brand": "Bakker Bart",
+      "category": "bakery",
+      "quantity": 1,
+      "unit": "stuks",
+      "expirationDate": "2025-10-23",
+      "storedIn": "Countertop",
+      "allergens": [
+        "gluten"
+      ],
+      "suitableForDiet": [
+        "VegetarianDiet"
+      ],
+      "addedAt": "2025-10-22T08:15:00Z"
+    },
+    "daysUntilExpiration": 0,
+    "severity": "red"
+  },
+  {
+    "product": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": "https://pantry.app/products/p001",
+      "name": "Melk",
+      "brand": "Campina",
+      "category": "dairy",
+      "quantity": 1,
+      "unit": "liter",
+      "expirationDate": "2025-10-24",
+      "storedIn": "Fridge",
+      "barcode": "8710400043287",
+      "allergens": [
+        "melk",
+        "lactose"
+      ],
+      "suitableForDiet": [],
+      "addedAt": "2025-10-15T10:30:00Z"
+    },
+    "daysUntilExpiration": 0,
+    "severity": "red"
+  },
+  {
+    "product": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": "https://pantry.app/products/p004",
+      "name": "Tomaten",
+      "category": "vegetables",
+      "quantity": 500,
+      "unit": "gram",
+      "expirationDate": "2025-10-27",
+      "storedIn": "Fridge",
+      "allergens": [],
+      "suitableForDiet": [
+        "VegetarianDiet",
+        "VeganDiet",
+        "GlutenFreeDiet"
+      ],
+      "addedAt": "2025-10-20T16:00:00Z"
+    },
+    "daysUntilExpiration": 3,
+    "severity": "orange"
+  },
+  {
+    "product": {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": "https://pantry.app/products/p002",
+      "name": "Eieren",
+      "brand": "Rondeel",
+      "category": "dairy",
+      "quantity": 6,
+      "unit": "stuks",
+      "expirationDate": "2025-10-30",
+      "storedIn": "Fridge",
+      "barcode": "8710400123456",
+      "allergens": [
+        "ei"
+      ],
+      "suitableForDiet": [
+        "VegetarianDiet"
+      ],
+      "addedAt": "2025-10-18T14:00:00Z"
+    },
+    "daysUntilExpiration": 6,
+    "severity": "green"
+  }
+]

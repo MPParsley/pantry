@@ -1,0 +1,27 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Recipe",
+    "@id": "https://pantry.app/recipes/r002",
+    "name": "Omelet met Tomaat",
+    "description": "Gezonde omelet met verse tomaat",
+    "recipeIngredient": [
+      "eieren",
+      "tomaten",
+      "zout",
+      "peper",
+      "olijfolie"
+    ],
+    "recipeInstructions": "1. Klop 2-3 eieren los met zout en peper. 2. Snijd tomaten in blokjes. 3. Verhit olijfolie in een pan. 4. Giet het ei in de pan en laat stollen. 5. Voeg tomatenblokjes toe. 6. Vouw de omelet dubbel en serveer.",
+    "recipeYield": "1 portie",
+    "prepTime": "PT5M",
+    "cookTime": "PT7M",
+    "allergens": [
+      "ei"
+    ],
+    "suitableForDiet": [
+      "VegetarianDiet",
+      "GlutenFreeDiet"
+    ]
+  }
+]
