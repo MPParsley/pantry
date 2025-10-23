@@ -1,11 +1,35 @@
 # Pantry MVP - Quick Start Guide
 
-Snelle setup om de applicatie te testen (5 minuten).
+Snelle setup om de applicatie te testen (2-5 minuten).
 
-## Vereisten
+## Kies je setup methode
 
-- Node.js 18+ geïnstalleerd
-- npm geïnstalleerd
+### 🐳 Optie A: Docker (Meest eenvoudig - 2 minuten)
+
+**Vereisten:** Docker & Docker Compose
+
+```bash
+# Clone repository
+git clone <repository-url>
+cd pantry
+
+# Start alles met één commando
+docker compose up -d
+
+# Open browser
+# Frontend: http://localhost
+# Backend: http://localhost:3000
+```
+
+**Klaar!** Alle services draaien nu in containers.
+
+[Spring naar Docker sectie →](#docker-setup)
+
+---
+
+### 💻 Optie B: Lokale installatie (5 minuten)
+
+**Vereisten:** Node.js 18+ en npm
 
 ## Installatie in 4 stappen
 
@@ -163,6 +187,102 @@ cd frontend
 rm -rf node_modules
 npm install
 ```
+
+---
+
+## Docker Setup
+
+### Start met Docker Compose
+
+```bash
+# 1. Clone repository (indien nog niet gedaan)
+git clone <repository-url>
+cd pantry
+
+# 2. Start alle services
+docker compose up -d
+
+# 3. Check status
+docker compose ps
+
+# 4. Seed database (optioneel - voorbeelddata)
+docker compose exec backend npx tsx backend/src/seed.ts
+```
+
+### Services
+
+- **Frontend**: http://localhost (port 80)
+- **Backend API**: http://localhost:3000
+- **API Docs**: http://localhost:3000/api
+
+### Handige Docker commando's
+
+```bash
+# View logs
+docker compose logs -f
+
+# Stop services
+docker compose down
+
+# Rebuild en start
+docker compose up --build
+
+# Reset alles (inclusief database)
+docker compose down -v
+docker compose up -d
+```
+
+### Development met Docker
+
+Start development mode met hot-reload:
+
+```bash
+docker compose -f docker-compose.dev.yml up
+```
+
+**Poorten:**
+- Frontend: http://localhost:5173 (Vite dev server)
+- Backend: http://localhost:3000
+
+### Pull Pre-built Images
+
+In plaats van lokaal bouwen, pull images van GitHub Container Registry:
+
+```bash
+# Pull images
+docker pull ghcr.io/mpparsley/pantry/backend:latest
+docker pull ghcr.io/mpparsley/pantry/frontend:latest
+
+# Start services
+docker compose up -d
+```
+
+### Docker Troubleshooting
+
+**Port already in use?**
+```bash
+# Change port in docker-compose.yml
+ports:
+  - "8080:80"  # Frontend op poort 8080
+  - "3001:3000"  # Backend op poort 3001
+```
+
+**Database issues?**
+```bash
+# Reset database volume
+docker compose down -v
+docker compose up -d
+docker compose exec backend npx tsx backend/src/seed.ts
+```
+
+**View container logs:**
+```bash
+docker compose logs backend
+docker compose logs frontend
+docker compose logs -f  # Follow mode
+```
+
+**Meer informatie:** Zie [DOCKER.md](DOCKER.md) voor complete Docker deployment gids.
 
 ---
 

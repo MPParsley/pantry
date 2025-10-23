@@ -1,0 +1,53 @@
+version: '3.8'
+
+# Development Docker Compose configuration
+# Usage: docker-compose -f docker-compose.dev.yml up
+
+services:
+  # Backend with hot-reload
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.dev
+    container_name: pantry-backend-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app/backend
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - pantry-data-dev:/app/data
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - DATABASE_PATH=/app/data/pantry.db
+    command: npm run dev:backend
+    networks:
+      - pantry-network-dev
+
+  # Frontend with hot-reload
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: pantry-frontend-dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+    depends_on:
+      - backend
+    networks:
+      - pantry-network-dev
+
+volumes:
+  pantry-data-dev:
+    driver: local
+
+networks:
+  pantry-network-dev:
+    driver: bridge

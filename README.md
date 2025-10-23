@@ -88,6 +88,45 @@ Dit start:
 ### Stap 5: Open browser
 Navigeer naar `http://localhost:5173`
 
+## 🐳 Docker Deployment
+
+### Quick Start met Docker Compose
+
+```bash
+# Start alle services met Docker
+docker compose up -d
+
+# Check status
+docker compose ps
+
+# View logs
+docker compose logs -f
+```
+
+**Services beschikbaar op:**
+- Frontend: http://localhost
+- Backend API: http://localhost:3000
+
+### Pull van GitHub Container Registry
+
+```bash
+# Pull pre-built images
+docker pull ghcr.io/mpparsley/pantry/backend:latest
+docker pull ghcr.io/mpparsley/pantry/frontend:latest
+
+# Start met docker compose
+docker compose up -d
+```
+
+### Development met Docker
+
+```bash
+# Start development environment met hot-reload
+docker compose -f docker-compose.dev.yml up
+```
+
+**Meer informatie:** Zie [DOCKER.md](DOCKER.md) voor complete Docker deployment gids.
+
 ## Datamodel
 
 ### Ontologie (ontology.ttl)

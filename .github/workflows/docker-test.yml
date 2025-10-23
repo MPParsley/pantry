@@ -1,0 +1,64 @@
+name: Docker Test
+
+on:
+  push:
+    branches:
+      - main
+      - 'claude/**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  docker-compose-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker images
+        run: |
+          docker compose build
+
+      - name: Start services
+        run: |
+          docker compose up -d
+
+      - name: Wait for services to be ready
+        run: |
+          echo "Waiting for backend to be healthy..."
+          timeout 60 bash -c 'until docker compose exec -T backend wget --quiet --tries=1 --spider http://localhost:3000/health; do sleep 2; done'
+          echo "✅ Backend is healthy"
+
+      - name: Test backend API
+        run: |
+          echo "Testing API endpoints..."
+
+          # Health check
+          curl -f http://localhost:3000/health || exit 1
+          echo "✅ Health check passed"
+
+          # API documentation
+          curl -f http://localhost:3000/api || exit 1
+          echo "✅ API documentation accessible"
+
+      - name: Test frontend
+        run: |
+          echo "Testing frontend..."
+          curl -f http://localhost:80 || exit 1
+          echo "✅ Frontend is accessible"
+
+      - name: Show logs on failure
+        if: failure()
+        run: |
+          docker compose logs backend
+          docker compose logs frontend
+
+      - name: Clean up
+        if: always()
+        run: |
+          docker compose down -v
